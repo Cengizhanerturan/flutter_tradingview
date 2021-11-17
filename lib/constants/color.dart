@@ -9,7 +9,8 @@ class ConstantsColor {
   static const Color textColor5 = Colors.purple;
   static const Color appColorW = Colors.white;
   static const Color appColorY = Colors.yellow;
-  static const Color appColorB = Colors.black87;
+  static const Color appColorDark = Color(0xFF1D1D35);
+  static const Color appColorB = Colors.black;
   static const Color appColorP = Colors.purple;
   static const Color appColorG = Colors.grey;
   static const Color errorColor = Colors.red;
