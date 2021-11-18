@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_tradingview/data/markets.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
@@ -14,8 +13,6 @@ class SocketController extends GetxController {
     {"stellar": "0", "renk": "2"},
     {"theta": "0", "renk": "2"},
     {"avalanche": "0", "renk": "2"},
-    {"cardano": "0", "renk": "2"},
-    {"xrp": "0", "renk": "2"},
     {"monero": "0", "renk": "2"},
     {"litecoin": "0", "renk": "2"},
     {"tron": "0", "renk": "2"},
@@ -24,11 +21,20 @@ class SocketController extends GetxController {
     {"chainlink": "0", "renk": "2"},
   ].obs;
 
-  var renkList = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2].obs;
+  var renkList = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2].obs;
 
-  final WebSocketChannel channel = WebSocketChannel.connect(
+  var tradesList = [].obs;
+
+  var widgetControl = 0.obs;
+  var coinIsim = ''.obs;
+
+  final WebSocketChannel channelPrices = WebSocketChannel.connect(
     Uri.parse(
-        'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,dogecoin,stellar,theta,avalanche,cardano,xrp,monero,litecoin,tron,solana,uniswap,chainlink'),
+        'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,dogecoin,stellar,theta,avalanche,monero,litecoin,tron,solana,uniswap,chainlink'),
+  );
+
+  final WebSocketChannel channelTrades = WebSocketChannel.connect(
+    Uri.parse('wss://ws.coincap.io/trades/binance'),
   );
 
   Future<Markets> marketsGetir() async {
